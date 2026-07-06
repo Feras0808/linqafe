@@ -14,8 +14,10 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "LinQafé",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{
