@@ -1,65 +1,154 @@
-import Image from "next/image";
+"use client";
+
+import {
+  CalendarDays,
+  Coffee,
+  Gift,
+  MapPin,
+  MessageCircle,
+  X,
+} from "lucide-react";
+import { useState } from "react";
+
+const links = [
+  {
+    title: "View Menu",
+    subtitle: "Explore our drinks & desserts",
+    icon: Coffee,
+    href: "#",
+  },
+  {
+    title: "Reserve Meeting Room",
+    subtitle: "Book your private meeting space",
+    icon: CalendarDays,
+    href: "https://calendar.app.google/VcLrrtFTd5Xu9Szt8",
+  },
+  {
+    title: "Loyalty Card",
+    subtitle: "Collect stamps & rewards",
+    icon: Gift,
+    href: "https://loyalty.is/vk7zb0",
+  },
+  {
+    title: "Find Us",
+    subtitle: "Open Google Maps",
+    icon: MapPin,
+    href: "https://maps.app.goo.gl/2fDqVB2MyFopgjTD6",
+  },
+  {
+    title: "WhatsApp",
+    subtitle: "Chat with us instantly",
+    icon: MessageCircle,
+    href: "https://wa.me/97433805071",
+  },
+];
+
+const menuImages = [
+  "/menu1.png",
+  "/menu2.png",
+  "/menu3.png",
+  "/menu4.png",
+  "/menu5.png",
+  "/menu6.png",
+];
 
 export default function Home() {
+  const [showMenu, setShowMenu] = useState(false);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main className="relative min-h-screen overflow-hidden bg-[#6B2733] text-[#F6E8DD]">
+      <section className="relative mx-auto flex min-h-screen max-w-md flex-col px-6 py-10">
+        <div className="text-center">
+          <div className="mx-auto flex h-28 w-28 items-center justify-center rounded-full border border-[#F6E8DD]/20 bg-white/10">
+            <span className="font-serif text-7xl">Q</span>
+          </div>
+
+          <p className="mt-6 text-xs uppercase tracking-[0.4em] text-[#F6E8DD]/60">
+            Coffee Shop
+          </p>
+
+          <h1 className="mt-2 font-serif text-5xl">LinQafé</h1>
+
+          <p className="mt-5 text-sm leading-7 text-[#F6E8DD]/70">
+            Crafted coffee, premium meetings,
+            <br />
+            unforgettable moments.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="mt-12 space-y-4">
+          {links.map((item) => {
+            const Icon = item.icon;
+
+            return (
+              <a
+                key={item.title}
+                href={item.href}
+                target={item.title === "View Menu" ? undefined : "_blank"}
+                rel={item.title === "View Menu" ? undefined : "noopener noreferrer"}
+                onClick={(e) => {
+                  if (item.title === "View Menu") {
+                    e.preventDefault();
+                    setShowMenu(true);
+                  }
+                }}
+                className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/10 p-4"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#F6E8DD] text-[#6B2733]">
+                  <Icon size={22} />
+                </div>
+
+                <div>
+                  <h2 className="font-medium">{item.title}</h2>
+                  <p className="mt-1 text-xs text-[#F6E8DD]/60">
+                    {item.subtitle}
+                  </p>
+                </div>
+              </a>
+            );
+          })}
         </div>
-      </main>
+
+        <footer className="mt-auto pt-12 text-center">
+          <p className="text-xs text-[#F6E8DD]/55">
+            © 2026 LinQafé Coffee Shop
+          </p>
+        </footer>
+      </section>
+
+      {showMenu && (
+  <div className="fixed inset-0 z-50 bg-[#6B2733]/95 backdrop-blur-sm">
+    <div className="mx-auto flex h-screen max-w-md flex-col">
+      {/* Header */}
+      <div className="flex items-center justify-between border-b border-white/10 bg-[#6B2733] px-5 py-5">
+        <h2 className="font-serif text-3xl text-[#F6E8DD]">
+          Our Menu
+        </h2>
+
+        <button
+          onClick={() => setShowMenu(false)}
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition hover:bg-white/20"
+        >
+          <X size={20} />
+        </button>
+      </div>
+
+      {/* Scrollable Content */}
+      <div className="flex-1 overflow-y-auto px-5 py-5">
+        <div className="grid grid-cols-2 gap-4 pb-10">
+          {menuImages.map((image, index) => (
+            <img
+              key={index}
+              src={image}
+              alt={`Menu ${index + 1}`}
+              className="w-full rounded-2xl border border-white/10 shadow-xl"
+            />
+          ))}
+        </div>
+      </div>
     </div>
+  </div>
+)}
+    </main>
   );
 }
